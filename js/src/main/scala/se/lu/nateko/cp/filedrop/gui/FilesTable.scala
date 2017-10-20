@@ -17,10 +17,10 @@ class FilesTable(info: Seq[FileInfo]) {
 	private def filesTable(files: Seq[FileInfo]) =
 		table(cls := "table")(
 			caption("Your files are listed below. No operations are supported at the moment."),
-			thead(tr(th("File name"))),
+			thead(tr(th("#"), th("File name"), th("File size (bytes)"))),
 			tbody(
 				for((file, i) <- info.zipWithIndex) yield tr(
-					th(i + 1), td(file.name)
+					th(i + 1), td(file.name), td(file.size)
 				)
 			)
 		)

@@ -1,4 +1,4 @@
 package se.lu.nateko.cp.filedrop
 
-case class FileInfo(name: String, isPublic: Boolean)
+case class FileInfo(name: String, size: Long)
 

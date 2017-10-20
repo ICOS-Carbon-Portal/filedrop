@@ -8,27 +8,28 @@ import org.scalajs.dom.raw.FileList
 
 import scalatags.JsDom.all._
 import se.lu.nateko.cp.filedrop.FileInfo
+import scala.concurrent.Future
 
 class MainView {
 
-	private val fileSender: FileList => Unit = Backend.sendFiles(_, updateFileList)
+	private val fileSender: FileList => Future[Unit] = Backend.sendFiles(_, updateFileList)
 
-	private var filesTable = new FilesTable(Nil).elem.render
-	private val filesContainer = div(cls := "col-md-6")(filesTable).render
+	private val filesContainer = div(cls := "col-md-6")(filesTable(Nil)).render
+	private val dropArea = new DropArea(fileSender)
 
 	val elem = div(cls := "container-fluid")(
 		div(cls := "row")(
 			filesContainer,
-			div(cls := "col-md-6")(
-				new DropArea(fileSender).elem
-			)
+			div(cls := "col-md-6")(dropArea.elem)
 		)
 	)
 
+	private def filesTable(files: Seq[FileInfo]) =
+		new FilesTable(files).elem.render
+
 	private val updateFileList: Seq[FileInfo] => Unit = files => {
-		val newFilesTable = new FilesTable(files).elem.render
-		filesContainer.replaceChild(newFilesTable, filesTable)
-		filesTable = newFilesTable
+		filesContainer.innerHTML = ""
+		filesContainer.appendChild(filesTable(files))
 	}
 
 	Backend.getFiles.onComplete{

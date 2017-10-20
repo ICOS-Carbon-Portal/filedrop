@@ -38,6 +38,6 @@ class FiledropService(conf: FiledropConfig, log: LoggingAdapter)(implicit ctxt: 
 	def getFiles(uid: UserId): Seq[FileInfo] = {
 		val dir = getUserFolder(uid)
 		Files.list(dir).toArray((i: Int) => Array.ofDim[Path](i))
-			.map(path => FileInfo(name = path.getFileName.toString, isPublic = false))
+			.map(path => FileInfo(name = path.getFileName.toString, size = Files.size(path)))
 	}
 }
