@@ -39,8 +39,8 @@ lazy val filedrop = crossProject
 		libraryDependencies ++= Seq(
 			"com.typesafe.akka" %% "akka-http"           % "10.0.10",
 			"de.heikoseeberger" %% "akka-http-play-json" % "1.18.0",
-			"se.lu.nateko.cp"   %% "views-core"          % "0.3.2-SNAPSHOT",
-			"se.lu.nateko.cp"   %% "cpauth-core"         % "0.5.1-SNAPSHOT"
+			"se.lu.nateko.cp"   %% "views-core"          % "0.4.0-SNAPSHOT",
+			"se.lu.nateko.cp"   %% "cpauth-core"         % "0.6.0-SNAPSHOT"
 		),
 		baseDirectory in reStart := {
 			baseDirectory.in(reStart).value.getParentFile

@@ -3,7 +3,7 @@
 @import se.lu.nateko.cp.cpauth.core.UserId
 
 @(uid: Option[UserId], config: PublicAuthConfig, jsFastOpt: Boolean = false)
-@CpCommonPage("Carbon Portal's file drop service", cpauthHostOpt = Some(config.cpauthHost)){
+@CpCommonPage("Carbon Portal's file drop service", cpauthHostOpt = Some(config.authHost)){
 }{
 	<div class = "page-header">
 		<h1>Carbon Portal file drop service</h1>
